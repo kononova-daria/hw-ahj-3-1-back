@@ -22,7 +22,7 @@ app.use(
   }),
 );
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 7020;
 const server = http.createServer(app.callback());
 const wsServer = new WS.Server({ server });
 
@@ -34,7 +34,7 @@ wsServer.on('connection', (ws) => {
 
     if (parameters.event === 'login') {
       const newName = parameters.data;
-      if (contacts.findIndex((item) => item.toUpperCase() === newName.toUpperCase()) === -1) {
+      if (contacts.findIndex((item) => item.name.toUpperCase() === newName.toUpperCase()) === -1) {
         const user = ws;
         user.name = newName;
         contacts.push(user);
